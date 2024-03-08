@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="center">Computation of Estimated Salaries Tax Liabilities</div>
+    <div class="center">Year of assessment 2022/2023</div>
+    
+    {% if single==True %}
+    <table style="width:100%">
+        <tr>
+            <th style="width:35%;"></th>
+            <th>Self (HK$)</th>
+        </tr>
+        <tr>
+            <td>Total Income</td>
+            <td class="taxresult">{{ total_self_Income }}</td>
+          </tr>    
+        <tr>
+            <td colspan="4">Deductions:</td>
+        </tr>
+        <tr>
+            <td>Mandatory Contributions to Recognized Retirement Schemes</td>
+            <td class="taxresult">{{ self_MPF }}</td>
+        </tr>
+        <tr>
+            <td>Qualifying Annuity Premiums</td>
+            <td class="taxresult">{{ self_AnnuityPremium }}</td>
+        </tr>
+        <tr>
+            <td>Domestic Rental Expenses</td>
+            <td class="taxresult">{{ self_Rent }}</td>
+        </tr>
+        <tr>
+            <td colspan="4">Qualifying Health Insurance Premiums:</td>
+        </tr>
+        <tr>
+            <td> - Amount paid for self</td>
+            <td class="taxresult">{{ self_HealthInsurance }}</td>
+        </tr>
+        <tr>
+            <td> - No.of specified relative(s)</td>
+            <td class="taxresult">{{ self_Relatives }}</td>
+        </tr>
+        <tr>
+            <td> - Amount paid for specified relative(s)</td>
+            <td class="taxresult">{{ self_RelativeHealthInsurance }}</td>
+        </tr>
+        <tr>
+            <td>Total Deductions</td>
+            <td class="taxresult">{{ total_self_Deduction }}</td>
+        </tr>
+
+        <tr>
+            <td>Allowances</td>
+            <td class="taxresult">{{ basic_Allowance }}</td>
+        </tr>
+
+        <tr>
+            <td>Net Chargeable Income</td>
+            <td class="taxresult">{{ self_ChargeIncome }}</td>
+        </tr>
+        <tr>
+            <td>Tax Payable <div style="color: red;">{{ advice }}</div> </td>
+            <td class="taxresult">{{ self_TaxPayable }}</td>
+        </tr>             
+        </table>
+    {% else %}
+    <table style="width:100%">
+        <tr>
+            <th style="width:35%;"></th>
+            <th style="width:21.6%;">Self (HK$)</th>
+            <th style="width:21.6%;">Spouse (HK$)</th>
+            <th style="width:21.6%;">Under Joint Assessment (HK$)</th>
+        </tr>
+        <tr>
+            <td>Total Income</td>
+            <td class="taxresult">{{ total_self_Income }}</td>
+            <td class="taxresult">{{ total_spouse_Income }}</td>
+            <td class="taxresult">{{ total_joint_Income }}</td>
+          </tr>    
+        <tr>
+            <td colspan="4">Deductions:</td>
+        </tr>
+        <tr>
+            <td>Mandatory Contributions to Recognized Retirement Schemes</td>
+            <td class="taxresult">{{ self_MPF }}</td>
+            <td class="taxresult">{{ spouse_MPF }}</td>
+            <td class="taxresult">{{ joint_MPF }}</td>
+        </tr>
+        <tr>
+            <td>Qualifying Annuity Premiums</td>
+            <td class="taxresult">{{ self_AnnuityPremium }}</td>
+            <td class="taxresult">{{ spouse_AnnuityPremium }}</td>
+            <td class="taxresult">{{ joint_AnnuityPremium }}</td>
+        </tr>
+        <tr>
+            <td>Domestic Rental Expenses</td>
+            <td class="taxresult">{{ self_Rent }}</td>
+            <td class="taxresult">{{ spouse_Rent }}</td>
+            <td class="taxresult">{{ joint_Rent }}</td>
+        </tr>
+        <tr>
+            <td colspan="4">Qualifying Health Insurance Premiums:</td>
+        </tr>
+        <tr>
+            <td> - Amount paid for self</td>
+            <td class="taxresult">{{ self_HealthInsurance }}</td>
+            <td class="taxresult">{{ spouse_HealthInsurance }}</td>
+            <td class="taxresult">{{ joint_HealthInsurance }}</td>
+        </tr>
+        <tr>
+            <td> - No.of specified relative(s)</td>
+            <td class="taxresult">{{ self_Relatives }}</td>
+            <td class="taxresult">{{ spouse_Relatives }}</td>
+            <td class="taxresult">{{ joint_Relatives }}</td>
+        </tr>
+        <tr>
+            <td> - Amount paid for specified relative(s)</td>
+            <td class="taxresult">{{ self_RelativeHealthInsurance }}</td>
+            <td class="taxresult">{{ spouse_RelativeHealthInsurance }}</td>
+            <td class="taxresult">{{ joint_RelativeHealthInsurance }}</td>
+        </tr>
+        <tr>
+            <td>Total Deductions</td>
+            <td class="taxresult">{{ total_self_Deduction }}</td>
+            <td class="taxresult">{{ total_spouse_Deduction }}</td>
+            <td class="taxresult">{{ total_joint_Deduction }}</td>
+        </tr>
+        <tr>
+            <td>Allowances</td>
+            <td class="taxresult">{{ basic_Allowance }}</td>
+            <td class="taxresult">{{ basic_Allowance }}</td>
+            <td class="taxresult">{{ joint_Allowance }}</td>
+        </tr>
+        <tr>
+            <td>Net Chargeable Income</td>
+            <td class="taxresult">{{ self_ChargeIncome }}</td>
+            <td class="taxresult">{{ spouse_ChargeIncome }}</td>
+            <td class="taxresult">{{ joint_ChargeIncome }}</td>
+        </tr>
+        <tr>
+            <td>Tax Payable</td>
+            <td class="taxresult">{{ self_TaxPayable }}</td>
+            <td class="taxresult">{{ spouse_TaxPayable }}</td>
+            <td class="taxresult">{{ joint_TaxPayable }}</td>
+        </tr>
+        <tr>
+            <td>Tax Payable <div style="color: red;">{{ advice }}</div> </td>
+            <td colspan="2" style="text-align: center;" class="taxresult">{{ total_TaxPayable }}</td>
+            <td class="taxresult">{{ joint_TaxPayable }}</td>
+        </tr>             
+        </table>
+        {% endif %}
+
+        <div class="text-center">
+            <button><a href="http://localhost:8080/"> Return </button>
+            </div>
+
+</body>
+<style>
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding : 10px;
+    font-size: 24px;
+}
+
+.taxresult {
+    text-align: right;
+    padding-right: 10px;
+}
+
+table, th, td {
+    border:1px solid black;
+    border-spacing: 2px;
+    font-size: 18px;
+    padding: 3px;
+}
+
+.text-center {
+  text-align: center;
+  margin: 20px;
+}
+
+</style>
+</html>

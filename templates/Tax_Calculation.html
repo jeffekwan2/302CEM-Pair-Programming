@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Calculator</title>
+</head>
+<body>
+    <div>
+        <div class="frame1-container">
+          <div class="frame1-frame1">
+            <span class="frame1-text">Salaries Tax Computation</span>
+            <span class="frame1-text01">Marital Status</span>
+            <span class="frame1-text02">
+              <span class="frame1-text03">
+                Year of Assessment                           
+              </span>
+              <span class="frame1-text04">2022/2023</span>
+              <span></span>
+            </span>
+            <span class="frame1-text06">
+              <span>
+                <span>Self</span>
+                <br />
+                <span>HK$</span>
+                <br />
+                <span>(Exclude Cents)</span>
+              </span>
+            </span>
+            <span class="frame1-text13">
+              <span>
+                <span>Spouse</span>
+                <br />
+                <span>HK$</span>
+                <br />
+                <span>(Exclude Cents)</span>
+              </span>
+            </span>
+            <form action="http://localhost:8080/taxCal" method="post">
+                <input type="radio" name="marriage_status" class="frame1-radiobutton" value="single" checked="checked"/>
+                <span class="frame1-text42">Single / Separated / Divorced / Widowed</span>
+                <input type="radio" name="marriage_status" class="frame1-radiobutton1" value="taken"/>
+                <span class="frame1-text43">Married</span>
+
+                <span class="frame1-text20">
+                <span>Income for the year of assessment</span>
+                </span>
+
+                <input type="number" class="frame1-textinput20 input"  min="0" value="0" name="self_Income"/>
+                <input type="number" class="frame1-textinput19 input"  min="0" value="0" name="spouse_Income"/>
+
+                <span class="frame1-text22">
+                <span>
+                    Value of all the places of residence provided by employer or
+                    associated corporation
+                </span>
+                </span>  
+
+                <input type="number" class="frame1-textinput17 input"  min="0" value="0" name="self_PlaceValue"/>
+                <input type="number" class="frame1-textinput18 input"  min="0" value="0" name="spouse_PlaceValue"/>
+
+                <span class="frame1-text41">Deductions</span>
+
+                <span class="frame1-text24">
+                <span>Mandatory Contributions to Recognized Retirement Schemes</span>
+                </span>
+
+                <input type="number" class="frame1-textinput15 input"  min="0" value="0" name="self_MPF"/>
+                <input type="number" class="frame1-textinput16 input"  min="0" value="0" name="spouse_MPF"/>
+
+                <span class="frame1-text26">
+                <span>Qualifying Annuity Premiums</span>
+                </span>
+
+                <input type="number" class="frame1-textinput13 input"  min="0" value="0" name="self_AnnuityPremium"/>
+                <input type="number" class="frame1-textinput14 input"  min="0" value="0" name="spouse_AnnuityPremium"/>
+
+                <span class="frame1-text28"><span>Domestic Rental Expenses</span></span>
+
+                <input type="number" class="frame1-textinput11 input"  min="0" value="0" name="self_Rent"/>
+                <input type="number" class="frame1-textinput12 input"  min="0" value="0" name="spouse_Rent"/>
+
+                <span class="frame1-text30">
+                <span>Qualifying Health Insurance Premiums</span>
+                </span>
+
+                <span class="frame1-text32"><span> - Amount paid for self</span></span>
+
+                <input type="number" class="frame1-textinput07 input"  min="0" value="0" name="self_HealthInsurance"/>
+                <input type="number" class="frame1-textinput08 input"  min="0" value="0" name="spouse_HealthInsurance"/> 
+
+                <span class="frame1-text34">
+                <span> - No.of specified relative(s)</span>
+                </span>
+
+                <select name="self_Relatives" class="frame1-textinput05 input" id="self_Relatives">
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+
+                <select name="spouse_Relatives" class="frame1-textinput06 input" id="spouse_Relatives">
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+
+                <span class="frame1-text36">
+                <span> - Amount paid for specified relative(s)</span>
+                </span>
+
+
+                <input type="number" class="frame1-textinput03 input"  min="0" value="0" name="self_RelativeHealthInsurance"/>
+                <input type="number" class="frame1-textinput04 input"  min="0" value="0" name="spouse_RelativeHealthInsurance"/>
+
+
+                <button type="reset" class="frame1-button1 button">Reset</button>
+                <button type="submit" class="frame1-button2 button">Calculate</button>
+            </form>
+          </div>
+        </div>
+      </div>      
+</body>
+<style>
+    .frame1-container {
+    width: 100%;
+    display: flex;
+    overflow: auto;
+    min-height: 100vh;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .frame1-frame1 {
+    width: 583px;
+    height: 842px;
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    align-items: flex-end;
+    flex-shrink: 0;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 1);
+  }
+  .frame1-text {
+    top: 28px;
+    left: 207px;
+    color: rgb(0, 0, 0);
+    height: auto;
+    position: absolute;
+    font-size: 15px;
+    font-style: Regular;
+    text-align: left;
+    font-family: "Inter";
+    font-weight: 700;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .frame1-text01 {
+    top: 88px;
+    left: 40px;
+    color: rgb(0, 0, 0);
+    height: auto;
+    position: absolute;
+    font-size: 13px;
+    font-style: Regular;
+    text-align: left;
+    font-family: "Inter";
+    font-weight: 700;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .frame1-text02 {
+    top: 66px;
+    left: 40px;
+    color: rgb(0, 0, 0);
+    height: auto;
+    position: absolute;
+    font-size: 13px;
+    font-style: Regular;
+    text-align: left;
+    font-family: "Inter";
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .frame1-text03 {
+    font-weight: 700;
+  }
+  .frame1-text04 {
+    font-weight: 700;
+  }
+  .frame1-text06 {
+    top: 121px;
+    left: 318px;
+    color: rgba(0, 0, 0, 1);
+    height: auto;
+    position: absolute;
+    font-size: 13px;
+    font-style: Regular;
+    text-align: center;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .frame1-text13 {
+    top: 121px;
+    left: 463px;
+    color: rgba(0, 0, 0, 1);
+    height: auto;
+    position: absolute;
+    font-size: 13px;
+    font-style: Regular;
+    text-align: center;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .frame1-textinput {
+    top: 517px;
+    left: 308px;
+    width: 100px;
+    height: 20px;
+    position: absolute;
+  }
+  .frame1-textinput01 {
+    top: 644px;
+    left: 308px;
+    width: 100px;
+    height: 20px;
+    position: absolute;
+  }
+  .frame1-textinput02 {
+    top: 644px;
+    right: 25px;
+    width: 100px;
+    height: 20px;
+    position: absolute;
+  }
+  .frame1-textinput03 {
+    top: 556px;
+    left: 308px;
+    width: 100px;
+    height: 20px;
+    position: absolute;
+  }
+  .frame1-textinput04 {
+    top: 556px;
+    right: 25px;
+    width: 100px;
+    height: 20px;
+    position: absolute;
+  }
+  .frame1-textinput05 {
+    top: 517px;
+    left: 308px;
+    width: 100px;
+    height: 20px;
+    position: absolute;
+  }
+  .frame1-textinput06 {
+    top: 517px;
+    right: 25px;
+    width: 100px;
+    height: 20px;
+    position: absolute;
+  }
+  .frame1-textinput07 {
+    top: 478px;
+    left: 308px;
+    width: 100px;
+    height: 20px;
+    position: absolute;
+  }
+  .frame1-textinput08 {
+    top: 478px;
+    right: 25px;
+    width: 100px;
+    height: 20px;
+    position: absolute;
+  }
+  .frame1-textinput09 {
+    top: 439px;
+    left: 308px;
+    width: 100px;
+    height: 20px;
+    position: absolute;
+  }
+  .frame1-textinput10 {
+    top: 439px;
+    right: 25px;
+    width: 100px;
+    height: 20px;
+    position: absolute;
+  }
+  .frame1-textinput11 {
+    top: 400px;
+    left: 308px;
+    width: 100px;
+    height: 20px;
+    position: absolute;
+  }
+  .frame1-textinput12 {
+    top: 400px;
+    right: 25px;
+    width: 100px;
+    height: 20px;
+    position: absolute;
+  }
+  .frame1-textinput13 {
+    top: 361px;
+    left: 308px;
+    width: 100px;
+    height: 20px;
+    position: absolute;
+  }
+  .frame1-textinput14 {
+    top: 361px;
+    right: 25px;
+    width: 100px;
+    height: 20px;
+    position: absolute;
+  }
+  .frame1-textinput15 {
+    top: 318px;
+    left: 308px;
+    width: 100px;
+    height: 20px;
+    position: absolute;
+  }
+  .frame1-textinput16 {
+    top: 318px;
+    right: 25px;
+    width: 100px;
+    height: 20px;
+    position: absolute;
+  }
+  .frame1-textinput17 {
+    top: 218px;
+    left: 308px;
+    width: 100px;
+    height: 20px;
+    position: absolute;
+  }
+  .frame1-textinput18 {
+    top: 218px;
+    right: 25px;
+    width: 100px;
+    height: 20px;
+    position: absolute;
+  }
+  .frame1-textinput19 {
+    top: 179px;
+    right: 25px;
+    width: 100px;
+    height: 20px;
+    position: absolute;
+  }
+  .frame1-text20 {
+    top: 182px;
+    left: 32px;
+    color: rgba(0, 0, 0, 1);
+    height: auto;
+    position: absolute;
+    font-size: 11px;
+    font-style: Regular;
+    text-align: left;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .frame1-text22 {
+    top: 217px;
+    left: 32px;
+    color: rgba(0, 0, 0, 1);
+    width: 238px;
+    height: auto;
+    position: absolute;
+    font-size: 11px;
+    font-style: Regular;
+    text-align: left;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .frame1-text24 {
+    top: 315px;
+    left: 32px;
+    color: rgba(0, 0, 0, 1);
+    width: 180px;
+    height: auto;
+    position: absolute;
+    font-size: 11px;
+    font-style: Regular;
+    text-align: left;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .frame1-text26 {
+    top: 364px;
+    left: 32px;
+    color: rgba(0, 0, 0, 1);
+    width: 180px;
+    height: auto;
+    position: absolute;
+    font-size: 11px;
+    font-style: Regular;
+    text-align: left;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .frame1-text28 {
+    top: 403px;
+    left: 32px;
+    color: rgba(0, 0, 0, 1);
+    width: 229px;
+    height: auto;
+    position: absolute;
+    font-size: 11px;
+    font-style: Regular;
+    text-align: left;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .frame1-text30 {
+    top: 442px;
+    left: 32px;
+    color: rgba(0, 0, 0, 1);
+    width: 229px;
+    height: auto;
+    position: absolute;
+    font-size: 11px;
+    font-style: Regular;
+    text-align: left;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .frame1-text32 {
+    top: 481px;
+    left: 32px;
+    color: rgba(0, 0, 0, 1);
+    width: 229px;
+    height: auto;
+    position: absolute;
+    font-size: 11px;
+    font-style: Regular;
+    text-align: left;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .frame1-text34 {
+    top: 520px;
+    left: 32px;
+    color: rgba(0, 0, 0, 1);
+    width: 229px;
+    height: auto;
+    position: absolute;
+    font-size: 11px;
+    font-style: Regular;
+    text-align: left;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .frame1-text36 {
+    top: 559px;
+    left: 32px;
+    color: rgba(0, 0, 0, 1);
+    width: 229px;
+    height: auto;
+    position: absolute;
+    font-size: 11px;
+    font-style: Regular;
+    text-align: left;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .frame1-text38 {
+    top: 641px;
+    left: 30px;
+    color: rgba(0, 0, 0, 1);
+    width: 229px;
+    height: auto;
+    position: absolute;
+    font-size: 11px;
+    font-style: Regular;
+    text-align: left;
+    font-family: Inter;
+    font-weight: 400;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .frame1-text40 {
+    top: 616px;
+    left: 30px;
+    color: rgb(0, 0, 0);
+    height: auto;
+    position: absolute;
+    font-size: 11px;
+    font-style: Regular;
+    text-align: left;
+    font-family: "Inter";
+    font-weight: 700;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .frame1-text41 {
+    top: 283px;
+    left: 30px;
+    color: rgb(0, 0, 0);
+    height: auto;
+    position: absolute;
+    font-size: 11px;
+    font-style: Regular;
+    text-align: left;
+    font-family: "Inter";
+    font-weight: 700;
+    line-height: normal;
+    font-stretch: normal;
+    text-decoration: none;
+  }
+  .frame1-radiobutton {
+    top: 87px;
+    left: 160px;
+    position: absolute;
+  }
+  .frame1-button {
+    top: 771px;
+    left: 330px;
+    position: absolute;
+  }
+  .frame1-text42 {
+    top: 89px;
+    left: 185px;
+    position: absolute;
+    font-size: 13px;
+  }
+  .frame1-radiobutton1 {
+    top: 87px;
+    left: 450px;
+    position: absolute;
+  }
+  .frame1-text43 {
+    top: 89px;
+    left: 470px;
+    position: absolute;
+    font-size: 13px;
+  }
+  .frame1-text44 {
+    top: 120px;
+    left: 456px;
+    position: absolute;
+    font-size: 13px;
+    text-align: center;
+  }
+  .frame1-text50 {
+    top: 120px;
+    left: 308px;
+    position: absolute;
+    font-size: 13px;
+    text-align: center;
+  }
+  .frame1-textinput20 {
+    top: 179px;
+    left: 308px;
+    width: 100px;
+    height: 20px;
+    position: absolute;
+  }
+  .frame1-button1 {
+    top: 640px;
+    left: 181px;
+    position: absolute;
+  }
+  .frame1-button2 {
+    top: 640px;
+    left: 330px;
+    position: absolute;
+  }
+</style>
+</html>
